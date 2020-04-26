@@ -9,17 +9,15 @@ class Reminder extends React.Component {
             hours: 0,
             minutes: 0,
             seconds: 0,
+            showAlert: false,
         };
 
 
     }
-    componentWillMount() {
-        this.showReminderUntil(this.props.end);
-    }
-
     componentDidMount() {
         this.interval=setInterval(() => this.showReminderUntil(this.props.end), 1000);
     }
+
     componentWillUnmount() {
         if (this.interval) {
             clearInterval(this.interval);
@@ -29,9 +27,12 @@ class Reminder extends React.Component {
     showReminderUntil(end) {
         const time = Date.parse(end) - Date.parse(new Date());
 
+      
+
         if(time <0) {
             this.props.deleteTimer();
-        } else {
+        }
+            else {
             const seconds = Math.floor((time/1000)%60);
             const minutes = Math.floor((time/1000/60)%60);
             const hours = Math.floor((time/(1000*60*60))%24);
@@ -43,12 +44,15 @@ class Reminder extends React.Component {
     }
 
     render() {
-        return(
-            <div className="reminder">
-                {this.state.days} days {this.state.hours} hours {this.state.minutes} minutes {this.state.seconds} seconds
-            </div>
-        );
-    }
+
+            return (
+                <div className="reminder">
+                    {this.state.days} days {this.state.hours} hours {this.state.minutes} minutes {this.state.seconds} seconds
+                </div>
+            );
+        }
+
+
 }
 
 export default Reminder;

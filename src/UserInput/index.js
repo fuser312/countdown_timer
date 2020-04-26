@@ -57,9 +57,11 @@ class UserInput extends React.Component{
                             <Reminder end={this.state.dateList[index]} deleteTimer={() => {
 
                                 this.state.dateList.splice(index, 1);
+                                alert("Reminder ended");
                                 this.setState({
                                     dateList: this.state.dateList
                                 });
+
 
                             }}/>
                         </div>))
